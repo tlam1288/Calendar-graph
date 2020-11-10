@@ -17,7 +17,7 @@ $(function() {
 
 //API
 
-var tokenID = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDUwNDI1OTUsImp0aSI6ImhKUFJtTU9SSTNqb0ZlVm05MkVHZk53SXVaeWlmK1lXTWpCQlJqVTJOa1k9IiwiaXNzIjoiYXBpLmZhc3RzZW5zb3IuY29tIiwibmJmIjoxNjA1MDQyNTk1LCJleHAiOjE2MDUwNTAzOTUsImRhdGEiOnsiY2xpZW50SWQiOiIyMEFGNTY2RiJ9fQ._1gVCDCvCe45LgmR1GHu3bAILl2Qwor1JTIaDe6icu1KsnSI1RaVESHJiJjnwvBuwgosH1-qcUz93OFpJJVY0g";
+var tokenID = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDUwNTA5ODksImp0aSI6InJ4VjdvZVpWeUVxVkVoZ0YwY25TSTRKRENSUTVjWUdTTWpCQlJqVTJOa1k9IiwiaXNzIjoiYXBpLmZhc3RzZW5zb3IuY29tIiwibmJmIjoxNjA1MDUwOTg5LCJleHAiOjE2MDUwNTg3ODksImRhdGEiOnsiY2xpZW50SWQiOiIyMEFGNTY2RiJ9fQ.1DorVf_GY9WWqZt8ObpXF5BdYWbLSFdlRu4CjucirPf1fP09fH_5LXR1_7yKuQI83cmOgqTDQ-sXk-JyaHqmKA";
 var locationID = "204D5F25";
 
 $.ajaxSetup({
@@ -28,6 +28,8 @@ $.ajaxSetup({
 
 
 let days = [];
+let dataCount;
+
 
 function fastSensorAPI(){
 $.getJSON(
@@ -72,6 +74,7 @@ $.getJSON(
 //   console.log(month);
 //   console.log(day);
    console.log(days);
+   graphData();
    graph();
 })
 .fail(function( jqxhr, textStatus, error ) {
@@ -80,21 +83,31 @@ $.getJSON(
 });
 }
 
+//counts # times array item appears
+function graphData(){
+    var counts = {};
+days.forEach((x) => { 
+    counts[x] = (counts[x] || 0)+1; 
+    });
+    console.log(Object.values(counts));
+    dataCount = counts;
+}
 
 // graph
 function graph(){
+    
 var ctx = document.getElementById('myChart');
 var ctx = document.getElementById('myChart').getContext('2d');
 var ctx = $('#myChart');
 var ctx = 'myChart';
 
 var myChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: {
-      labels: days,
+      labels: [...new Set(days)],
       datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: '# of Events',
+          data: dataCount,
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
