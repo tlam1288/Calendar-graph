@@ -1,3 +1,40 @@
+//API
+
+var tokenID = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDUwMzQ3NjgsImp0aSI6IllHc0VJN3hSNHVXNU5NUUFETCtGazAyd0hXemFnRFVMTWpCQlJqVTJOa1k9IiwiaXNzIjoiYXBpLmZhc3RzZW5zb3IuY29tIiwibmJmIjoxNjA1MDM0NzY4LCJleHAiOjE2MDUwNDI1NjgsImRhdGEiOnsiY2xpZW50SWQiOiIyMEFGNTY2RiJ9fQ.givQMHpQaQGBWK6fz3OhcWlctWXRjWBnL6qk2K2R6y1C-xLQi_LXK1t581leS-NkkIdxGFmnmBHguRw3nqsNzQ";
+var locationID = "204D5F25";
+
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + tokenID);
+    }
+});
+$.getJSON(
+"https://appsrv.fastsensor.us:8890/v1/locations/" + locationID + "/alerts",
+{
+  start_date: "2020-05-01",
+  end_date: "2020-05-02",
+  selector: "[ADAM]"
+  
+  
+} )
+.done(function(data) {
+    let newData = Object.entries(data)
+    let unixTimestamp = newData[2][1][0].timestamp;
+    let date = new Date(unixTimestamp*1000);
+
+  console.log("Success:");
+  console.log(date);
+  console.log(newData[2][1][0].timestamp); //gets the timestamp from the data object
+})
+.fail(function( jqxhr, textStatus, error ) {
+  var err = textStatus + ", " + error;
+  console.log( "Request Failed: " + err );
+});
+
+
+
+
+
 //calendar
 $(function() {
     $('input[name="daterange"]').daterangepicker({
