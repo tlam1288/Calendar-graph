@@ -48,14 +48,30 @@ $.getJSON(
 
     console.log(data);
     let newData = Object.entries(data)
-    let unixTimestamp = newData[2][1][0].timestamp;
-    let date = new Date(unixTimestamp*1000);
+    // let unixTimestamp = newData[2][1][0].timestamp;
+    // let date = new Date(unixTimestamp*1000);
+    // let year = date.getUTCFullYear();
+    // let month = date.getUTCMonth() + 1;
+    // let day = date.getUTCDate();
+    let dataArr = newData[2][1];
+
+    dataArr.forEach((ts) => {
+        let date = new Date(ts.timestamp*1000);
+        let year = date.getUTCFullYear();
+        let month = date.getUTCMonth() + 1;
+        let day = date.getUTCDate();
+        days.push(month + "/" + day + "/" + year);
+    });
 
   console.log("Success:");
   console.log(newData);
-  console.log(date);
-  console.log(newData[2][1]);
+  //console.log(date);
+  console.log(dataArr); //the data array
   console.log(newData[2][1][0].timestamp); //gets the timestamp from the data object
+//   console.log(year);
+//   console.log(month);
+//   console.log(day);
+   console.log(days);
 })
 .fail(function( jqxhr, textStatus, error ) {
   var err = textStatus + ", " + error;
