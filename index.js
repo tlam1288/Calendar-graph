@@ -8,8 +8,8 @@ $(function() {
     }, function(start, end, label) {
         beginDate = start.format('YYYY-MM-DD');
         endDate =  end.format('YYYY-MM-DD');
-        console.log(beginDate + " " + endDate);
-      console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD')); 
+       // console.log(beginDate + " " + endDate);
+      //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD')); 
       fastSensorAPI();
     })  
   });
@@ -48,7 +48,7 @@ $.getJSON(
         return;
     }
 
-    console.log(data);
+   // console.log(data);
     let newData = Object.entries(data)
     // let unixTimestamp = newData[2][1][0].timestamp;
     // let date = new Date(unixTimestamp*1000);
@@ -65,15 +65,15 @@ $.getJSON(
         days.push(month + "/" + day + "/" + year);
     });
 
-  console.log("Success:");
-  console.log(newData);
+ // console.log("Success:");
+ // console.log(newData);
   //console.log(date);
-  console.log(dataArr); //the data array
-  console.log(newData[2][1][0].timestamp); //gets the timestamp from the data object
+ // console.log(dataArr); //the data array
+  //console.log(newData[2][1][0].timestamp); //gets the timestamp from the data object
 //   console.log(year);
 //   console.log(month);
 //   console.log(day);
-   console.log(days);
+  // console.log(days);
    graphData();
    graph();
 })
@@ -89,8 +89,8 @@ function graphData(){
 days.forEach((x) => { 
     counts[x] = (counts[x] || 0)+1; 
     });
-    console.log(Object.values(counts));
-    dataCount = counts;
+    //console.log(Object.values(counts));
+    dataCount = Object.values(counts);
 }
 
 // graph
