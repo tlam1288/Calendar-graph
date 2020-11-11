@@ -6,9 +6,6 @@ let queryURL = "https://appsrv.fastsensor.us:8890/oauth2/token?client_id=" + cli
 let tokenID;
 let locationID = "204D5F25";
 let days = [];
-//let dataCount;
-
-
 
 function apiCall(){
     $.ajaxSetup({
@@ -20,13 +17,13 @@ function apiCall(){
     $.ajax({
         url: queryURL,
         method: "GET",  
-        }).then(response => {
+        })
+        .then(response => {
         tokenID = response.access_token;
         });
 }
 
 apiCall();
-
 
 function fastSensorAPI(){
 $.getJSON(
@@ -69,4 +66,4 @@ $.getJSON(
 }
 
 
-
+module.exports = FastSensorAPI;

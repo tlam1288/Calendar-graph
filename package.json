@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/tlam1288/Calendar-graph#readme",
   "devDependencies": {
+    "babel-jest": "^26.6.3",
     "jest": "^26.6.3"
   }
 }

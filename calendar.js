@@ -2,7 +2,8 @@
 let beginDate;
 let endDate;
 
-$(function() {
+
+$(function Calendar() {
     $('input[name="daterange"]').daterangepicker({
       opens: 'left'
     }, function(start, end, label) {
@@ -14,4 +15,4 @@ $(function() {
     })  
   });
 
-  
+module.exports = Calendar;

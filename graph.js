@@ -53,3 +53,5 @@ function clearDates(){
     days = [];
 
 }
+
+module.exports = graphData;
