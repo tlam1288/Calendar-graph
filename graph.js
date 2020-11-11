@@ -1,16 +1,28 @@
-// chart
-var ctx = document.getElementById('myChart');
-var ctx = document.getElementById('myChart').getContext('2d');
+//counts # times array item appears
+function graphData(){
+    var counts = {};
+days.forEach((x) => { 
+    counts[x] = (counts[x] || 0)+1; 
+    });
+    //console.log(Object.values(counts));
+    dataCount = Object.values(counts);
+}
+
+// graph
+function graph(){
+   
+//var ctx = document.getElementById('myChart');
+//var ctx = document.getElementById('myChart').getContext('2d');
 var ctx = $('#myChart');
-var ctx = 'myChart';
+//var ctx = 'myChart';
 
 var myChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: [...new Set(days)],
       datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: '# of Events',
+          data: dataCount,
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -30,13 +42,22 @@ var myChart = new Chart(ctx, {
           borderWidth: 1
       }]
   },
-  options: {
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true
-              }
-          }]
-      }
-  }
+//   options: {
+//       scales: {
+//           yAxes: [{
+//               ticks: {
+//                   beginAtZero: true
+//               }
+//           }]
+//       }
+//   }
 });
+clearDates();
+}
+
+function clearDates(){
+    beginDate = "";
+    endDate = "";
+    days = [];
+
+}

@@ -14,20 +14,22 @@
     <title>Calendar-Graph</title>
 </head>
 <body>
-   
- <div class="container">
-    
-<h1 class="middle">Events per day</h1>
-<p class="middle">Select a date range from the calendar below to see the number of events per day on a graph</p>
+   <div class="container">
+    <h1 class="middle">Events per day</h1>
+        <p class="middle">Select a date range from the calendar below to see the number of events per day on a graph.<br>
+        If there is no data available in the date range chosen then you will be alerted
+        </p>
+        <div class="row">
+            
+    <input type="text" name="daterange" value="06/01/2020 - 06/15/2020" class="mx-auto" style="width: 200px;" />
 
-<input type="text" name="daterange" value="06/01/2020 - 06/15/2020" />
-<canvas id="myChart"  ></canvas>
-
+</div>
+    <canvas id="myChart"  ></canvas>
 </div>
 
 <script src="index.js"></script>
-<!-- <script src="calendar.js"></script> -->
-<!-- <script src="graph.js"></script> -->
+<script src="calendar.js"></script>
+<script src="graph.js"></script>
     
 </body>
 </html>
