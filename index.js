@@ -6,8 +6,9 @@ let queryURL = "https://appsrv.fastsensor.us:8890/oauth2/token?client_id=" + cli
 let tokenID;
 let locationID = "204D5F25";
 let days = [];
-let dataCount;
-let myChart;
+//let dataCount;
+
+
 
 function apiCall(){
     $.ajaxSetup({
@@ -37,18 +38,20 @@ $.getJSON(
 } )
 .done(function(data) {
 
+    let newData = Object.entries(data)
+    let dataArr = newData[2][1];
+
     if(data.data.length === 0){
         alert("No data in range, please choose other dates");
         return;
     }
 
+    //clears out previous chart
     if (myChart) {
       myChart.destroy();
     }
 
-    let newData = Object.entries(data)
-    let dataArr = newData[2][1];
-
+    //adds dates converted from epoc time to days array to use in x-axis of graph
     dataArr.forEach((ts) => {
         let date = new Date(ts.timestamp*1000);
         let year = date.getUTCFullYear();
@@ -65,5 +68,5 @@ $.getJSON(
 });
 }
 
-module.exports = FastSensorAPI;
+
 

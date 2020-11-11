@@ -1,4 +1,7 @@
-//counts # times array item appears
+let myChart;
+let dataCount;
+
+//counts # times array item appears to use as data in graph
 function graphData(){
     let counts = {};
 days.forEach((x) => { 
@@ -8,7 +11,7 @@ days.forEach((x) => {
     dataCount = Object.values(counts);
 }
 
-// graph
+// renders the bar graph
 function graph(){
 
 let ctx = $('#myChart');
@@ -39,19 +42,11 @@ myChart = new Chart(ctx, {
           borderWidth: 1
       }]
   },
-//   options: {
-//       scales: {
-//           yAxes: [{
-//               ticks: {
-//                   beginAtZero: true
-//               }
-//           }]
-//       }
-//   }
 });
 clearDates();
 }
 
+//clears out dates so a new chart can render if new dates are chosen
 function clearDates(){
     beginDate = "";
     endDate = "";
