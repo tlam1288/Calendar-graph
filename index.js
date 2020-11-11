@@ -11,14 +11,24 @@ $(function() {
        // console.log(beginDate + " " + endDate);
       //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD')); 
       fastSensorAPI();
+     
     })  
   });
 
 
 //API
+let clientID = "20AF566F";
+let APIKEY = "Vu112d0Wmg99bx/ax02bUlNipBEOv3uIPrf73ZNJ8NgvN0qlnhpqYfVP80eXhX2X"
+let queryURL = "https://appsrv.fastsensor.us:8890/oauth2/token?client_id=" + clientID + "&api_key=" + APIKEY;
+let tokenID;
+let locationID = "204D5F25";
 
-var tokenID = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MDUwNTA5ODksImp0aSI6InJ4VjdvZVpWeUVxVkVoZ0YwY25TSTRKRENSUTVjWUdTTWpCQlJqVTJOa1k9IiwiaXNzIjoiYXBpLmZhc3RzZW5zb3IuY29tIiwibmJmIjoxNjA1MDUwOTg5LCJleHAiOjE2MDUwNTg3ODksImRhdGEiOnsiY2xpZW50SWQiOiIyMEFGNTY2RiJ9fQ.1DorVf_GY9WWqZt8ObpXF5BdYWbLSFdlRu4CjucirPf1fP09fH_5LXR1_7yKuQI83cmOgqTDQ-sXk-JyaHqmKA";
-var locationID = "204D5F25";
+$.ajax({
+   url: queryURL,
+   method: "GET",  
+}).then(response => {
+    tokenID = response.access_token;
+});
 
 $.ajaxSetup({
     beforeSend: function(xhr) {
@@ -44,7 +54,7 @@ $.getJSON(
 .done(function(data) {
 
     if(data.data.length === 0){
-        alert("no data in range, please choose other dates");
+        alert("No data in range, please choose other dates");
         return;
     }
 
@@ -83,6 +93,7 @@ $.getJSON(
 });
 }
 
+
 //counts # times array item appears
 function graphData(){
     var counts = {};
@@ -95,11 +106,11 @@ days.forEach((x) => {
 
 // graph
 function graph(){
-    
-var ctx = document.getElementById('myChart');
-var ctx = document.getElementById('myChart').getContext('2d');
+   
+//var ctx = document.getElementById('myChart');
+//var ctx = document.getElementById('myChart').getContext('2d');
 var ctx = $('#myChart');
-var ctx = 'myChart';
+//var ctx = 'myChart';
 
 var myChart = new Chart(ctx, {
   type: 'bar',
@@ -127,17 +138,24 @@ var myChart = new Chart(ctx, {
           borderWidth: 1
       }]
   },
-  options: {
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true
-              }
-          }]
-      }
-  }
+//   options: {
+//       scales: {
+//           yAxes: [{
+//               ticks: {
+//                   beginAtZero: true
+//               }
+//           }]
+//       }
+//   }
 });
+clearDates();
 }
 
+function clearDates(){
+    beginDate = "";
+    endDate = "";
+    days = [];
+
+}
 
 
