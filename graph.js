@@ -1,22 +1,19 @@
 //counts # times array item appears
 function graphData(){
-    var counts = {};
+    let counts = {};
 days.forEach((x) => { 
     counts[x] = (counts[x] || 0)+1; 
     });
-    //console.log(Object.values(counts));
+    
     dataCount = Object.values(counts);
 }
 
 // graph
 function graph(){
-   
-//var ctx = document.getElementById('myChart');
-//var ctx = document.getElementById('myChart').getContext('2d');
-var ctx = $('#myChart');
-//var ctx = 'myChart';
 
-var myChart = new Chart(ctx, {
+let ctx = $('#myChart');
+
+myChart = new Chart(ctx, {
   type: 'bar',
   data: {
       labels: [...new Set(days)],
